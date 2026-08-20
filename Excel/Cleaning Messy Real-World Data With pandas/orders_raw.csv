@@ -1,0 +1,7 @@
+order_id,customer_name,city,price,order_date
+1," John Smith ",new york,$120.50,2024-01-15
+2,Jane Doe,New York,150,01/16/2024
+3,Jane Doe,New York,150,01/16/2024
+4,mike jones,LA,,2024/01/17
+5,Sara Lee,"  Chicago",$95,
+6,,Boston,$60.00,2024-01-18
