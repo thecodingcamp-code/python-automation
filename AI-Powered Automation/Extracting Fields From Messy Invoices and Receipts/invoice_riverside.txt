@@ -1,0 +1,4 @@
+INVOICE #INV-2024-0512
+Vendor: Riverside Bakery Supplies
+Date: 2024-03-15
+Total Due: $245.00
