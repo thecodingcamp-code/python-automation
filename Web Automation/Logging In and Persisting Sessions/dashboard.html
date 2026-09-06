@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head><title>Riverside Bakery - Account</title></head>
+<body>
+  <div id="login-form">
+    <h1>Log In</h1>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    <br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <br><br>
+    <button id="login-btn" type="button">Log In</button>
+    <p id="login-error" style="color:red; display:none;">Invalid username or password.</p>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <h1>Your Account</h1>
+    <p>Welcome back! Here is your order history:</p>
+    <ul id="order-history">
+      <li>Order #1042 - Sourdough Loaf - Delivered</li>
+      <li>Order #1045 - Sourdough Loaf - Delivered</li>
+    </ul>
+  </div>
+
+  <script>
+    // Check login state on every page load, the same way a real site
+    // would check a session cookie or auth token before rendering anything.
+    function checkLoginState() {
+      if (localStorage.getItem("logged_in") === "true") {
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+      } else {
+        document.getElementById("login-form").style.display = "block";
+        document.getElementById("dashboard").style.display = "none";
+      }
+    }
+
+    document.getElementById("login-btn").addEventListener("click", function() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Simplified stand-in for a real auth check
+      if (username === "demo" && password === "demo123") {
+        localStorage.setItem("logged_in", "true");
+        localStorage.setItem("username", username);
+        checkLoginState();
+      } else {
+        document.getElementById("login-error").style.display = "block";
+      }
+    });
+
+    checkLoginState();
+  </script>
+</body>
+</html>

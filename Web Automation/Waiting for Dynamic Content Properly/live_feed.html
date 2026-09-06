@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head><title>Riverside Bakery - Order Feed</title></head>
+<body>
+  <h1>Recent Orders</h1>
+
+  <div id="spinner" class="spinner">Loading feed...</div>
+  <ul id="feed" style="display:none;"></ul>
+
+  <button id="load-more" style="display:none;">Load More</button>
+
+  <script>
+    // Simulate a real network request with unpredictable-ish timing,
+    // the same way a real fetch() call to an API would behave.
+    const initialItems = [
+      "Order #1042 - Sourdough Loaf - Ready for pickup",
+      "Order #1043 - Dozen Croissants - Ready for pickup",
+      "Order #1044 - Birthday Cake (Chocolate) - Ready for pickup"
+    ];
+
+    const moreItems = [
+      "Order #1045 - Sourdough Loaf - Ready for pickup",
+      "Order #1046 - Cinnamon Rolls (6-pack) - Ready for pickup"
+    ];
+
+    function renderItems(items) {
+      const feed = document.getElementById("feed");
+      items.forEach(function(text) {
+        const li = document.createElement("li");
+        li.className = "feed-item";
+        li.textContent = text;
+        feed.appendChild(li);
+      });
+    }
+
+    // Randomized delay between 600ms and 1400ms, simulating real network variance
+    const delay = 600 + Math.random() * 800;
+
+    setTimeout(function() {
+      document.getElementById("spinner").style.display = "none";
+      document.getElementById("feed").style.display = "block";
+      document.getElementById("load-more").style.display = "inline-block";
+      renderItems(initialItems);
+    }, delay);
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("load-more").addEventListener("click", function() {
+        this.disabled = true;
+        this.textContent = "Loading...";
+        setTimeout(function() {
+          renderItems(moreItems);
+          document.getElementById("load-more").remove();
+        }, 700);
+      });
+    });
+  </script>
+</body>
+</html>

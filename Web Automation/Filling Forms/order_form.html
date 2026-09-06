@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head><title>Riverside Bakery - Place an Order</title></head>
+<body>
+  <h1>Place Your Order</h1>
+
+  <div id="step-1" class="form-step">
+    <h2>Step 1: Choose Your Item</h2>
+    <label for="product">Product:</label>
+    <select id="product" name="product">
+      <option value="">-- Select a product --</option>
+      <option value="sourdough">Sourdough Loaf - $8.00</option>
+      <option value="croissants">Dozen Croissants - $18.00</option>
+      <option value="birthday-cake">Birthday Cake - $35.00</option>
+    </select>
+    <br><br>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" value="1" min="1">
+    <br><br>
+    <button id="next-btn" type="button">Next</button>
+  </div>
+
+  <div id="step-2" class="form-step" style="display:none;">
+    <h2>Step 2: Your Details</h2>
+    <label for="customer-name">Full Name:</label>
+    <input type="text" id="customer-name" name="customer-name">
+    <br><br>
+    <label for="customer-email">Email:</label>
+    <input type="email" id="customer-email" name="customer-email">
+    <br><br>
+    <p>Fulfillment method:</p>
+    <input type="radio" id="pickup" name="fulfillment" value="pickup" checked>
+    <label for="pickup">Pickup</label><br>
+    <input type="radio" id="delivery" name="fulfillment" value="delivery">
+    <label for="delivery">Delivery</label>
+    <br><br>
+    <input type="checkbox" id="gift-wrap" name="gift-wrap">
+    <label for="gift-wrap">Add gift wrapping (+$3.00)</label>
+    <br><br>
+    <button id="place-order-btn" type="button">Place Order</button>
+  </div>
+
+  <div id="confirmation" class="form-step" style="display:none;">
+    <h2>Order Confirmed!</h2>
+    <p id="confirmation-details"></p>
+  </div>
+
+  <script>
+    document.getElementById('next-btn').addEventListener('click', function() {
+      const product = document.getElementById('product').value;
+      if (!product) {
+        alert('Please select a product first.');
+        return;
+      }
+      document.getElementById('step-1').style.display = 'none';
+      document.getElementById('step-2').style.display = 'block';
+    });
+
+    document.getElementById('place-order-btn').addEventListener('click', function() {
+      // Simulate a brief server-side processing delay before showing confirmation
+      const btn = this;
+      btn.disabled = true;
+      btn.textContent = 'Placing order...';
+
+      setTimeout(function() {
+        const product = document.getElementById('product').selectedOptions[0].text;
+        const quantity = document.getElementById('quantity').value;
+        const name = document.getElementById('customer-name').value;
+        const fulfillment = document.querySelector('input[name="fulfillment"]:checked').value;
+        const giftWrap = document.getElementById('gift-wrap').checked;
+
+        const details = `Thanks, ${name}! Your order of ${quantity}x ${product} ` +
+                         `will be ready for ${fulfillment}` +
+                         (giftWrap ? ', gift wrapped' : '') + '.';
+
+        document.getElementById('confirmation-details').textContent = details;
+        document.getElementById('step-2').style.display = 'none';
+        document.getElementById('confirmation').style.display = 'block';
+      }, 500);
+    });
+  </script>
+</body>
+</html>

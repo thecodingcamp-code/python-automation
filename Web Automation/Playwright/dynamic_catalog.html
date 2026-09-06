@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>The Coding Camp Store</title></head>
+<body>
+  <h1>Featured Courses</h1>
+  <div id="product-list">
+    <p class="loading-message">Loading courses...</p>
+  </div>
+
+  <script>
+    // Simulate a real-world pattern: content fetched and rendered by JS
+    // after the page has already loaded, the same way a React or Vue app would.
+    setTimeout(function() {
+      const products = [
+        { name: "Python Automation Bootcamp", price: "$149.00" },
+        { name: "Node.js REST API Course", price: "$129.00" },
+        { name: "AI Engineering with Python", price: "$179.00" }
+      ];
+
+      const container = document.getElementById("product-list");
+      container.innerHTML = "";
+
+      products.forEach(function(p) {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = "<h2 class='product-name'>" + p.name + "</h2>" +
+                          "<span class='product-price'>" + p.price + "</span>";
+        container.appendChild(card);
+      });
+    }, 800);
+  </script>
+</body>
+</html>
